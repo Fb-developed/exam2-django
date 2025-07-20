@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} List Income {% endblock title %}
+{% block content %}
+  
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Category</th>
+        </tr>
+    {% for income in incomes %}
+        <tr>
+            <td> {{income.id}} </td>
+            <td> {{income.amount}} </td>
+            <td> {{income.description}} </td>
+            <td> {{income.category}} </td>
+            <td> 
+                <a href="{% url 'task_edit' task.id %}">Edit</a>
+                <a href="{% url 'task_delete' task.id %}">Delete</a>
+            </td>
+        </tr>
+    {% endfor %}    
+    </table>
+{% endblock content %}
