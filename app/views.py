@@ -21,7 +21,7 @@ def income_create_view(request):
         amount = request.POST.get("amount", False)
         category_id = request.POST.get("category", False)
         description = request.POST.get("description", False)
-        user_id = request.POST.get("user", False)
+        user_id = request.POST.get("user_id", False)
         if not amount or not category_id or not description or not user_id:
             return HttpResponse("error")
         category = Category.objects.filter(id=category_id).first()
@@ -45,13 +45,16 @@ def expense_create_view(request):
         amount = request.POST.get("amount", False)
         category_id = request.POST.get("category", False)
         description = request.POST.get("description", False)
+        user_id = request.POST.get("user_id")
         if not amount or not category_id or not description:
             return HttpResponse("error")
         category = Category.objects.filter(id=category_id).first()
+        user = User.objects.filter(id=user_id).first()
         Expense.objects.create(
             amount = amount,
             category = category,
             description= description,
+            user = user
         )
     return redirect("expense-list")
         
